@@ -31,7 +31,12 @@ public class PictureByNASAService {
             ObjectMapper objectMapper = new ObjectMapper();
             JsonNode jsonNode = objectMapper.readTree(response.body().string());
             String url = jsonNode.get("url").asText();
+            String media = jsonNode.get("media_type").asText();
             title = jsonNode.get("title").asText();
+            if("video".equals(media)){
+                url = "https://apod.nasa.gov/apod/image/2208/Cartwheel_Webb_960.jpg";
+                title = "The Cartwheel Galaxy from Webb";
+            }
             URL urlImage  = new URL(url);
             return urlImage;
         } catch (IOException e) {

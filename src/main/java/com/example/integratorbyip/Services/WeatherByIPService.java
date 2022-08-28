@@ -6,18 +6,21 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
 @Service
 public class WeatherByIPService {
+    @Value("${weather.key}")
+    private String key;
 
     public Weather getWeather(String latitude, String longitude){
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         Request request = new Request.Builder().
                 url("https://api.weatherbit.io/v2.0/current?lat="+latitude+"&lon="+longitude+
-                        "&key=18d8787528a6433bb330ba628c95ecd9&lang=ru")
+                        "&key="+key+"&lang=ru")
                 .get()
                 .build();
         Response response = null;

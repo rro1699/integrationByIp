@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.vaadin.flow.server.WebBrowser;
 import okhttp3.*;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 
@@ -17,13 +18,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class LocationByIPService {
 
+    @Value("${ip.key}")
+    private String key;
 
     public Location getInfoAboutLocationByIp(String ip){
         OkHttpClient client = new OkHttpClient().newBuilder().build();
         String localIp = "194.226.199.8";
         Request request = new Request.Builder().
                 url("https://api.apilayer.com/ip_to_location/"+ip)
-                .addHeader("apikey", "703NSqk47Tx4mAq39LTM0NpMF7Sf03If")
+                .addHeader("apikey", key)
                 .get()
                 .build();
         Response response = null;
