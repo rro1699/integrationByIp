@@ -23,6 +23,7 @@ public class LocationByIPService {
 
     public Location getInfoAboutLocationByIp(String ip){
         OkHttpClient client = new OkHttpClient().newBuilder().build();
+        System.out.println("location key: "+key);
         String localIp = "194.226.199.8";
         Request request = new Request.Builder().
                 url("https://api.apilayer.com/ip_to_location/"+ip)

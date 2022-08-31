@@ -13,11 +13,7 @@ import java.net.URL;
 
 @Service
 public class PictureByNASAService {
-    private String title;
 
-    public String getTitle() {
-        return title;
-    }
 
     public URL getPicture(){
         OkHttpClient client = new OkHttpClient().newBuilder().build();
@@ -32,10 +28,8 @@ public class PictureByNASAService {
             JsonNode jsonNode = objectMapper.readTree(response.body().string());
             String url = jsonNode.get("url").asText();
             String media = jsonNode.get("media_type").asText();
-            title = jsonNode.get("title").asText();
             if("video".equals(media)){
                 url = "https://apod.nasa.gov/apod/image/2208/Cartwheel_Webb_960.jpg";
-                title = "The Cartwheel Galaxy from Webb";
             }
             URL urlImage  = new URL(url);
             return urlImage;

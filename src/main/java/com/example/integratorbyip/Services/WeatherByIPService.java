@@ -18,9 +18,10 @@ public class WeatherByIPService {
 
     public Weather getWeather(String latitude, String longitude){
         OkHttpClient client = new OkHttpClient().newBuilder().build();
+        System.out.println("weaher key: "+key);
         Request request = new Request.Builder().
                 url("https://api.weatherbit.io/v2.0/current?lat="+latitude+"&lon="+longitude+
-                        "&key="+key+"&lang=ru")
+                        "&key="+key)
                 .get()
                 .build();
         Response response = null;
